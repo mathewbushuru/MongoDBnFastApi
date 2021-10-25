@@ -73,8 +73,10 @@ class UpdateStudentModel(BaseModel):
 @app.post("/", response_description="Add new student", response_model=StudentModel)
 async def create_student(student: StudentModel = Body(...)):
     student = jsonable_encoder(student)
-    new_student = await db["students"].insert_one(student)
-    created_student = await db["students"].find_one({"_id": new_student.inserted_id})
+    #new_student = await db["students"].insert_one(student)
+    new_student = db["students"].insert_one(student)
+    #created_student = await db["students"].find_one({"_id": new_student.inserted_id})
+    created_student = db["students"].find_one({"_id": new_student.inserted_id})
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_student)
 
 
