@@ -6,9 +6,11 @@ from pydantic import BaseModel, Field, EmailStr
 from bson import ObjectId
 from typing import Optional, List
 import motor.motor_asyncio
+import pymongo 
 
 app = FastAPI()
-client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
+#client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["mongodb+srv://dev-user:dev-user@cluster0.3m0ri.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"])
+client = pymongo.MongoClient("mongodb+srv://dev-user:dev-user@cluster0.3m0ri.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.college
 
 
@@ -80,8 +82,8 @@ async def create_student(student: StudentModel = Body(...)):
     "/", response_description="List all students", response_model=List[StudentModel]
 )
 async def list_students():
-    students = await db["students"].find().to_list(1000)
-    return students
+    #students = await db["students"].find().to_list(1000)
+    students = db["students"].find()
 
 
 @app.get(
