@@ -9,7 +9,8 @@ export MONGODB_URL="mongodb+srv://<username>:<password>@<url>/<db>?retryWrites=t
 
  - Run this to start server
  ```
-uvicorn app:app --reload
+uvicorn final:app --reload
  ```
+ to see final result. Using app.py to build to this incrementally
 
  - see application under http://127.0.0.0/docs
