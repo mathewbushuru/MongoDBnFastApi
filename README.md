@@ -1,0 +1,1 @@
+ - A CRUD App that integrates MongoDB with a FastAPI project
